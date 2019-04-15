@@ -1,5 +1,5 @@
 <#
-Title:      vm-encrypt
+Title:       azure-encrypt
 AUTHOR:      PAUL SCHWARZENBERGER
 DATE:        15/04/2019
 DESCRIPTION: Creates Azure Key Vault and encrypts virtual machines
