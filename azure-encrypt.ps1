@@ -53,7 +53,7 @@ Usage:       azure-encrypt.ps1
     # Encrypt virtual machines where needed
     Get-AzureRmResource | Where {$_.ResourceGroupName -eq $ResourceGroupName -and $_.ResourceType -eq "Microsoft.Compute/virtualMachines"} | ForEach-Object { 
         $VmName = $_.Name
-        $VmDiskEncryptionStatus = Get-AzureRmVmDiskEncryptionStatus -ResourceGroupName $ResourceGroupName -VMName $VmName
+        $VmDiskEncryptionStatus = Get-AzureRmVmDiskEncryptionStatus -ResourceGroupName $ResourceGroupName -VMName $VmName -ErrorAction SilentlyContinue
 
         if ($VmDiskEncryptionStatus.OsVolumeEncrypted -ne "Encrypted" -or $VmDiskEncryptionStatus.DataVolumesEncrypted -ne "Encrypted"){
             Set-AzureRmVMDiskEncryptionExtension `
@@ -70,5 +70,5 @@ Usage:       azure-encrypt.ps1
     # Report encryption status
     Get-AzureRmResource | Where {$_.ResourceGroupName -eq $ResourceGroupName -and $_.ResourceType -eq "Microsoft.Compute/virtualMachines"} | ForEach-Object {
         $VmName = $_.Name
-        Get-AzureRmVmDiskEncryptionStatus -ResourceGroupName $ResourceGroupName -VMName $VmName
+        Get-AzureRmVmDiskEncryptionStatus -ResourceGroupName $ResourceGroupName -VMName $VmName -ErrorAction SilentlyContinue
         }
